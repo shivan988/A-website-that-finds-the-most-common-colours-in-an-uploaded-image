@@ -23,6 +23,7 @@ def extract_color_code(path):
     return top_10_colors
 
 
+# demo of getting path of image
 # d = extract_color_code("static/img/rgb.jpg")
 #
 # for key,value in d.items():
