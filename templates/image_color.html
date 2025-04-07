@@ -1,0 +1,26 @@
+{% include 'header.html' %}
+
+<div class="d-flex justify-content-center align-items-center vh-100" style="background-image:url('https://static.vecteezy.com/system/resources/thumbnails/040/890/255/small_2x/ai-generated-empty-wooden-table-on-the-natural-background-for-product-display-free-photo.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div class="card rounded-4" style="width: 25rem; text-align:center; margin-top:20px;">
+      <img src="{{url_for('static', filename='img/save_here.jpg')}}" class="card-img-top" alt="default image">
+      <div class="card-body">
+        <p class="card-text">Click on the below button to upload image.</p>
+            {% if session == {} %}
+
+          <a href="{{url_for('upload_image')}}" class="btn btn-primary" style="margin-top:20px"> Upload Image </a>
+          <a href="{{url_for('home')}}" class="btn btn-success" style="margin-top:20px"> Home </a>
+          {% else %}
+          <a href="{{url_for('color_extract')}}" class="btn btn-primary" style="margin-top:20px"> Previous Image </a>
+          <a href="{{url_for('upload_image')}}" class="btn btn-primary" style="margin-top:20px"> Upload Image </a>
+          <a href="{{url_for('home')}}" class="btn btn-success" style="margin-top:20px"> Home </a>
+          {%endif%}
+
+
+
+      </div>
+
+    </div>
+
+</div>
+
+{% include 'footer.html' %}

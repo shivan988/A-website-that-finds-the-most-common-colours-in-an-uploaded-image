@@ -1,0 +1,56 @@
+{% include "header.html" %}
+
+<div class="container">
+    <h1><b><span style="font-family:times new roman">Top <span style="color:red">20 colors</span> in the images are:</span></b></h1>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card text-bg-light mb-3" style="max-width: 80%;">
+                <div class="card-header">List of colors</div>
+                <div class="card-body">
+                    {% for key, value in list_col.items() %}
+                    <ul>
+                        <li>
+                            <p style="margin-bottom:-20px">
+                                The color used is: {{key}}, and frequency of this color is: {{value}}, color image:
+                                <svg width="100" height="100">
+                                    <circle cx="50" cy="50" r="40"
+                                            fill="rgb({{key|replace('(','')|replace(')','')}})"
+                                            stroke="black" stroke-width="2" />
+                                </svg>
+                            </p>
+                            <hr>
+
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" style="margin-left:-150px; text-align:center">
+            <h3><i> This <span style="color:brown">image</span> was uploaded.</i></h3>
+            <img src="{{image}}" alt="image" height="350" width="500">
+            <div style="margin-top:20px">
+                <hr>
+                <h3><i><span style="color:brown">Color pellete.</span></i></h3>
+            {% for key, value in list_col.items() %}
+            <svg width="100" height="100">
+            <rect x="10" y="10" width="80" height="80"
+            fill="rgb({{key|replace('(','')|replace(')','')}})"
+            stroke="black" stroke-width="3" />
+            </svg>
+
+            {% endfor %}
+                </div>
+            <hr>
+             <a href="{{url_for('home')}}" class="btn btn-primary" style="margin-top:20px;">Home</a>
+            <a href="{{url_for('upload_image')}}" class="btn btn-secondary" style="margin-top:20px; margin-left:20px">Upload Image Again</a>
+        </div>
+    </div>
+    <div>
+
+    </div>
+</div>
+
+{% include "footer.html" %}
