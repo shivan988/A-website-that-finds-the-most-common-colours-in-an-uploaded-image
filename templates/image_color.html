@@ -1,26 +1,118 @@
 {% include 'header.html' %}
 
-<div class="d-flex justify-content-center align-items-center vh-100" style="background-image:url('https://static.vecteezy.com/system/resources/thumbnails/040/890/255/small_2x/ai-generated-empty-wooden-table-on-the-natural-background-for-product-display-free-photo.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <div class="card rounded-4" style="width: 25rem; text-align:center; margin-top:20px;">
-      <img src="{{url_for('static', filename='img/save_here.jpg')}}" class="card-img-top" alt="default image">
-      <div class="card-body">
-        <p class="card-text">Click on the below button to upload image.</p>
-            {% if session == {} %}
+<head>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden; /* Prevents scrollbars */
+        }
 
-          <a href="{{url_for('upload_image')}}" class="btn btn-primary" style="margin-top:20px"> Upload Image </a>
-          <a href="{{url_for('home')}}" class="btn btn-success" style="margin-top:20px"> Home </a>
-          {% else %}
-          <a href="{{url_for('color_extract')}}" class="btn btn-primary" style="margin-top:20px"> Previous Image </a>
-          <a href="{{url_for('upload_image')}}" class="btn btn-primary" style="margin-top:20px"> Upload Image </a>
-          <a href="{{url_for('home')}}" class="btn btn-success" style="margin-top:20px"> Home </a>
-          {%endif%}
+        /* Main Container Styling */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/040/890/255/small_2x/ai-generated-empty-wooden-table-on-the-natural-background-for-product-display-free-photo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Adds a subtle overlay for better text readability */
+            background-color: rgba(255, 255, 255, 0.1); /* White with 10% opacity */
+            background-blend-mode: overlay; /* Combines the image and color */
+        }
 
+        /* Card Styling */
+        .card {
+            width: 25rem;
+            text-align: center;
+            margin-top: 20px;
+            border: none; /* Removes the border */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+            transition: transform 0.3s ease; /* Smooth transition for hover effect */
+            border-radius: 1rem; /* Rounded corners for a softer look */
+            background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+        }
 
+        .card:hover {
+            transform: translateY(-5px); /* Slightly lifts the card on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhances shadow on hover */
+        }
 
-      </div>
+        .card-img-top {
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd; /* Adds a subtle separator */
+        }
 
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Button Styling */
+        .btn {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #1e7e34;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="card rounded-4">
+            <img src="{{url_for('static', filename='img/save_here.jpg')}}" class="card-img-top" alt="default image">
+            <div class="card-body">
+                <p class="card-text">Click on the below button to upload image.</p>
+                {% if session == {} %}
+                <a href="{{url_for('upload_image')}}" class="btn btn-primary"> Upload Image </a>
+                <a href="{{url_for('home')}}" class="btn btn-success"> Home </a>
+                {% else %}
+                <a href="{{url_for('color_extract')}}" class="btn btn-primary"> Previous Image </a>
+                <a href="{{url_for('upload_image')}}" class="btn btn-primary"> Upload Image </a>
+                <a href="{{url_for('home')}}" class="btn btn-success"> Home </a>
+                {% endif %}
+            </div>
+        </div>
     </div>
-
-</div>
+</body>
 
 {% include 'footer.html' %}

@@ -1,56 +1,244 @@
 {% include "header.html" %}
 
-<div class="container">
-    <h1><b><span style="font-family:times new roman">Top <span style="color:red">20 colors</span> in the images are:</span></b></h1>
+<head>
+  <style>
+    body {
+      font-family: 'Times New Roman', serif;
+      background-color: #fafafa;
+      color: #333;
+      margin: 0;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 span {
+      color: #d32f2f; /* red accent */
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .card-header {
+      font-weight: 700;
+      font-size: 1.4rem;
+      background-color: #d32f2f;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 1rem 1rem 0 0;
+      box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-body {
+      padding: 1rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    /* List styling */
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    ul li {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    ul li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    ul li p {
+      margin-bottom: 0.25rem;
+      font-size: 1.05rem;
+      color: #444;
+    }
+
+    /* SVG circle styling */
+    svg circle {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    svg circle:hover {
+      transform: scale(1.1);
+      stroke-width: 3;
+      stroke: #d32f2f;
+    }
+
+    /* Right column */
+    .col-md-4 {
+      text-align: center;
+      padding-left: 2rem;
+      position: relative;
+      top: 0;
+      margin-left: 0;
+    }
+
+    /* Image styling */
+    .col-md-4 img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+
+    .col-md-4 img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 30px rgba(211, 47, 47, 0.3);
+    }
+
+    /* Color palette container */
+    .color-palette svg {
+      margin: 0.3rem;
+      cursor: pointer;
+      border-radius: 0.3rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .color-palette svg:hover {
+      transform: scale(1.15);
+      box-shadow: 0 6px 15px rgba(211, 47, 47, 0.5);
+    }
+
+    /* Headings in right column */
+    .col-md-4 h3 {
+      font-weight: 600;
+      font-style: italic;
+      color: #6d4c41; /* brownish */
+      margin-bottom: 1rem;
+    }
+
+    .col-md-4 h3 span {
+      color: #6d4c41;
+      font-weight: 700;
+    }
+
+    /* Buttons */
+    a.btn {
+      margin-top: 1.25rem;
+      padding: 0.6rem 1.6rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      min-width: 140px;
+    }
+
+    a.btn-primary {
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+    }
+
+    a.btn-primary:hover {
+      background-color: #b71c1c;
+      box-shadow: 0 6px 20px rgba(183, 28, 28, 0.6);
+      color: white;
+    }
+
+    a.btn-secondary {
+      background-color: #757575;
+      color: white;
+      border: none;
+    }
+
+    a.btn-secondary:hover {
+      background-color: #494949;
+      box-shadow: 0 6px 20px rgba(73, 73, 73, 0.6);
+      color: white;
+    }
+
+    /* Responsive fixes */
+    @media (max-width: 991px) {
+      .col-md-8, .col-md-4 {
+        max-width: 100%;
+        flex: 0 0 100%;
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        text-align: center;
+      }
+
+      .col-md-4 {
+        margin-top: 2rem;
+      }
+
+      .card {
+        max-width: 100% !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1><b><span>Top <span>20 colors</span> in the images are:</span></b></h1>
     <hr>
 
     <div class="row">
-        <div class="col-md-8">
-            <div class="card text-bg-light mb-3" style="max-width: 80%;">
-                <div class="card-header">List of colors</div>
-                <div class="card-body">
-                    {% for key, value in list_col.items() %}
-                    <ul>
-                        <li>
-                            <p style="margin-bottom:-20px">
-                                The color used is: {{key}}, and frequency of this color is: {{value}}, color image:
-                                <svg width="100" height="100">
-                                    <circle cx="50" cy="50" r="40"
-                                            fill="rgb({{key|replace('(','')|replace(')','')}})"
-                                            stroke="black" stroke-width="2" />
-                                </svg>
-                            </p>
-                            <hr>
-
-                        </li>
-                    </ul>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4" style="margin-left:-150px; text-align:center">
-            <h3><i> This <span style="color:brown">image</span> was uploaded.</i></h3>
-            <img src="{{image}}" alt="image" height="350" width="500">
-            <div style="margin-top:20px">
-                <hr>
-                <h3><i><span style="color:brown">Color pellete.</span></i></h3>
+      <div class="col-md-8">
+        <div class="card text-bg-light mb-3" style="max-width: 80%;">
+          <div class="card-header">List of colors</div>
+          <div class="card-body">
             {% for key, value in list_col.items() %}
-            <svg width="100" height="100">
-            <rect x="10" y="10" width="80" height="80"
-            fill="rgb({{key|replace('(','')|replace(')','')}})"
-            stroke="black" stroke-width="3" />
-            </svg>
-
+            <ul>
+              <li>
+                <p>
+                  The color used is: <strong>{{key}}</strong>, and frequency of this color is: <strong>{{value}}</strong>, color image:
+                  <svg width="100" height="100" role="img" aria-label="Color circle">
+                    <circle cx="50" cy="50" r="40" fill="rgb({{key|replace('(','')|replace(')','')}})" stroke="black" stroke-width="2" />
+                  </svg>
+                </p>
+              </li>
+            </ul>
             {% endfor %}
-                </div>
-            <hr>
-             <a href="{{url_for('home')}}" class="btn btn-primary" style="margin-top:20px;">Home</a>
-            <a href="{{url_for('upload_image')}}" class="btn btn-secondary" style="margin-top:20px; margin-left:20px">Upload Image Again</a>
+          </div>
         </div>
-    </div>
-    <div>
+      </div>
 
+      <div class="col-md-4">
+        <h3><i> This <span>image</span> was uploaded.</i></h3>
+        <img src="{{image}}" alt="Uploaded image" height="350" width="500" loading="lazy" />
+        <div class="color-palette" style="margin-top: 20px;">
+          <hr />
+          <h3><i><span>Color palette.</span></i></h3>
+          {% for key, value in list_col.items() %}
+          <svg width="100" height="100" role="img" aria-label="Color swatch">
+            <rect x="10" y="10" width="80" height="80" fill="rgb({{key|replace('(','')|replace(')','')}})" stroke="black" stroke-width="3" />
+          </svg>
+          {% endfor %}
+        </div>
+        <hr />
+        <a href="{{url_for('home')}}" class="btn btn-primary">Home</a>
+        <a href="{{url_for('upload_image')}}" class="btn btn-secondary" style="margin-left: 20px;">Upload Image Again</a>
+      </div>
     </div>
-</div>
+  </div>
+</body>
 
 {% include "footer.html" %}
